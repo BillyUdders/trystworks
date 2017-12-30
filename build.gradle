@@ -1,7 +1,7 @@
 buildscript {
     ext {
-        kotlinVersion = '1.1.51'
-        springBootVersion = '2.0.0.M5'
+        kotlinVersion = '1.2.10'
+        springBootVersion = '2.0.0.M6'
     }
 
     repositories {
@@ -11,7 +11,7 @@ buildscript {
     }
 
     dependencies {
-	    	classpath("org.junit.platform:junit-platform-gradle-plugin:1.0.1")
+        classpath("org.junit.platform:junit-platform-gradle-plugin:1.0.2")
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
         classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
@@ -49,13 +49,15 @@ repositories {
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-data-mongodb-reactive')
+    compile('org.springframework.boot:spring-boot-starter-data-cassandra-reactive')
     compile('org.springframework.boot:spring-boot-starter-webflux')
+    compile('com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0')
     compile("org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}")
     compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
-	  testCompile("org.junit.jupiter:junit-jupiter-api")
-	  testRuntime("org.junit.jupiter:junit-jupiter-engine")
     testCompile('io.projectreactor:reactor-test')
+    testCompile("org.junit.jupiter:junit-jupiter-api")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine")
+    testCompile('org.junit.platform:junit-platform-launcher:1.0.2')
 }

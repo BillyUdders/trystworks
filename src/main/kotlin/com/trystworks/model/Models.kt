@@ -1,9 +1,16 @@
 package com.trystworks.model
 
-import org.springframework.data.annotation.Id
-import org.springframework.data.mongodb.core.mapping.Field
 import java.util.*
 
-data class PostDto(val id: UUID, val text: String)
+data class UserDto(private val id: UUID, private val text: String) {
+    fun toDomain(): User {
+        return User(id, text)
+    }
+}
 
-data class Post(@Id @Field("id") val id: UUID, @Field("text") val text: String)
+data class User(private val id: UUID, private val text: String) {
+    fun toDto(): UserDto {
+        return UserDto(id, text)
+    }
+}
+
