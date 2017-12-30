@@ -6,7 +6,6 @@ import org.springframework.data.cassandra.config.AbstractReactiveCassandraConfig
 import org.springframework.data.cassandra.config.SchemaAction
 import org.springframework.data.cassandra.repository.config.EnableReactiveCassandraRepositories
 
-
 @Configuration
 @EnableReactiveCassandraRepositories
 class WorksConfig : AbstractReactiveCassandraConfiguration() {
@@ -21,14 +20,16 @@ class WorksConfig : AbstractReactiveCassandraConfiguration() {
     private val basePackages: String? = null
 
     override fun getKeyspaceName(): String {
-        return keyspace.
+        return checkNotNull(keyspace, { "Need keyspace to connect." })
     }
 
     override fun getContactPoints(): String {
-        return contactPoints
+        return checkNotNull(contactPoints, { "Can't start without contact points." })
     }
 
     override fun getPort(): Int {
+        check(port != 0, { "Can't start on null port." })
+
         return port
     }
 
@@ -37,7 +38,6 @@ class WorksConfig : AbstractReactiveCassandraConfiguration() {
     }
 
     override fun getEntityBasePackages(): Array<String> {
-        return arrayOf<String>(basePackages)
+        return arrayOf(checkNotNull(basePackages))
     }
-}
 }
