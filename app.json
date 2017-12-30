@@ -1,7 +1,0 @@
-{
-  "name": "TrystWorks",
-  "description": "A Blog.",
-  "addons": [
-    "heroku-mongodb"
-  ]
-}
