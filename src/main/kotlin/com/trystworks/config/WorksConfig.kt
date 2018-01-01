@@ -20,16 +20,14 @@ class WorksConfig : AbstractReactiveCassandraConfiguration() {
     private val basePackages: String? = null
 
     override fun getKeyspaceName(): String {
-        return checkNotNull(keyspace, { "Need keyspace to connect." })
+        return keyspace!!
     }
 
     override fun getContactPoints(): String {
-        return checkNotNull(contactPoints, { "Can't start without contact points." })
+        return contactPoints!!
     }
 
     override fun getPort(): Int {
-        check(port != 0, { "Can't start on null port." })
-
         return port
     }
 
@@ -38,6 +36,6 @@ class WorksConfig : AbstractReactiveCassandraConfiguration() {
     }
 
     override fun getEntityBasePackages(): Array<String> {
-        return arrayOf(checkNotNull(basePackages))
+        return arrayOf(basePackages!!)
     }
 }

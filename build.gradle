@@ -1,12 +1,11 @@
 buildscript {
     ext {
         kotlinVersion = '1.2.10'
-        springBootVersion = '2.0.0.M6'
+        springBootVersion = '2.0.0.M7'
     }
 
     repositories {
         mavenCentral()
-        maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
     }
 
@@ -15,6 +14,17 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
         classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+    }
+}
+
+subprojects {
+    configurations.all {
+        resolutionStrategy {
+            forcedModules = [
+                    "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
+                    "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+            ]
+        }
     }
 }
 
@@ -27,7 +37,7 @@ apply plugin: 'application'
 group = 'com.trystworks'
 version = '0.1'
 sourceCompatibility = 1.8
-mainClassName = 'com.trystworks.PostApplication'
+mainClassName = 'com.trystworks.WorksApplication'
 
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
@@ -44,7 +54,6 @@ jar {
 
 repositories {
     mavenCentral()
-    maven { url "https://repo.spring.io/snapshot" }
     maven { url "https://repo.spring.io/milestone" }
 }
 
