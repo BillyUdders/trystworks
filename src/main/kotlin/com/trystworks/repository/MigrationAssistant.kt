@@ -8,9 +8,10 @@ import java.io.File
 import java.nio.charset.Charset
 
 @Component
-class MigrationAssistant(private val db: CassandraTemplate, @Value("migration.path") private val location: String) : InitializingBean {
+class MigrationAssistant(private val db: CassandraTemplate,
+                         @Value("migration.path") private val location: String) : InitializingBean {
 
-    override fun afterPropertiesSet() {2
+    override fun afterPropertiesSet() {
         migrate(location)
     }
 

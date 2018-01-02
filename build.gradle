@@ -25,6 +25,7 @@ subprojects {
                     "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
             ]
         }
+        exclude group: 'io.netty', module: 'netty-transport-native-epoll'
     }
 }
 
